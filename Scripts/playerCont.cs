@@ -17,19 +17,21 @@ public class playerCont : MonoBehaviour {
 
 	void FixedUpdate () {
 		Jump();
+		Move();
 	}
 
 	public void Jump() {
 		if (onGround && Input.GetKeyDown(KeyCode.Space)) {
        		rb.AddForce(new Vector2(0, jumpForce));
     	} 
+	}
 
+	public void Move() {
     	if(Input.GetKey(KeyCode.A)) {
     		rb.velocity = new Vector2(-speed, 0);
     	} else if(Input.GetKey(KeyCode.D)) {
     		rb.velocity = new Vector2(speed, 0);
     	}
-
 	}
 
 	void OnCollisionEnter2D(Collision2D col) {
