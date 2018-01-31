@@ -17,6 +17,8 @@ public class ClampBoard: MonoBehaviour {
     private bool jumping;
     private bool onGround;
 
+    private Vector3 moveDirection = Vector3.zero;
+
     void Start () {
         rigid = this.GetComponent<Rigidbody2D>();
         StartCoroutine (JumpTimer());
@@ -28,19 +30,18 @@ public class ClampBoard: MonoBehaviour {
     }
 
     public void Move() {
-        rigid.velocity = new Vector2(-moveSpeed, 0);
+        rigid.velocity = new Vector2(-moveSpeed, this.rigid.velocity.y);
     }
 
     IEnumerator JumpTimer() {
         while (true) {
             yield return new WaitForSeconds (Random.Range (5, 10));
             Jump();
-            Debug.Log ("Jump");
         }
     }
 
     public void Jump() {
-        rigid.velocity = new Vector2(0, jumpForce);
+        rigid.velocity = new Vector2(this.rigid.velocity.x,jumpForce);
     }
 
     void OnCollisionEnter2D(Collision2D col) {
