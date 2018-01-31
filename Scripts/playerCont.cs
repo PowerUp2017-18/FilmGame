@@ -24,9 +24,9 @@ public class playerCont : MonoBehaviour {
        		rb.AddForce(new Vector2(0, jumpForce));
     	} 
 
-    	if(Input.GetKeyDown(KeyCode.A)) {
+    	if(Input.GetKey(KeyCode.A)) {
     		rb.velocity = new Vector2(-speed, 0);
-    	} else if(Input.GetKeyDown(KeyCode.D)) {
+    	} else if(Input.GetKey(KeyCode.D)) {
     		rb.velocity = new Vector2(speed, 0);
     	}
 
