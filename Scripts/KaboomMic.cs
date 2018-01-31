@@ -19,16 +19,16 @@ public class KaboomMic : MonoBehaviour {
 
 	void Start() {
 		countdownText = GetComponent<Text>();
-		Detection();
 	}
 	
 	void Update () {
-
+		Detection();
 	}
 
 	public void Detection() {
 		if(Vector3.Distance(player.position, transform.position) <= detectionRange) {
 			detected = true;
+			Debug.Log("Detected");
 			StartCoroutine(Countdown());
 		}
 	}
@@ -36,19 +36,15 @@ public class KaboomMic : MonoBehaviour {
 	public void Explode() {
  		if(detected && Vector3.Distance(player.position, transform.position) <= explodeRange && explode == true) {
 			Destroy(player.gameObject);
-		} else {
-			detected = false;
-			explode = false;
-			Detection();
+			Debug.Log("Destroy");
 		}
 	}
+
 	IEnumerator Countdown() {
         while (true) {
             yield return new WaitForSeconds (explodeTime);
-            
             explode = true;
             Explode();
         }
     }
 }
-
