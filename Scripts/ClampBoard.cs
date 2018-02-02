@@ -48,5 +48,8 @@ public class ClampBoard: MonoBehaviour {
         if (col.gameObject.tag == "Wall") {
             moveSpeed *= -1;
         }
+        if(col.gameObject.tag == "Enemy") {
+            moveSpeed *= -1;
+        }
     }
 }
