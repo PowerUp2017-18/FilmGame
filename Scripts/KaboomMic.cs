@@ -9,7 +9,7 @@ public class KaboomMic : MonoBehaviour {
 	public float explodeRange;
 	public float explodeTime;
 
-	public static bool detected = false;
+	public bool detected = false;
 	private bool inRange = false;
 	private bool explode = false;
 
