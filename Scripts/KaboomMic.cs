@@ -9,17 +9,11 @@ public class KaboomMic : MonoBehaviour {
 	public float explodeRange;
 	public float explodeTime;
 
-	public Text countdownText;
-
-	private bool detected = false;
+	public static bool detected = false;
 	private bool inRange = false;
 	private bool explode = false;
 
 	public Transform player;
-
-	void Start() {
-		countdownText = GetComponent<Text>();
-	}
 	
 	void Update () {
 		Detection();
@@ -28,7 +22,6 @@ public class KaboomMic : MonoBehaviour {
 	public void Detection() {
 		if(Vector3.Distance(player.position, transform.position) <= detectionRange) {
 			detected = true;
-			Debug.Log("Detected");
 			StartCoroutine(Countdown());
 		}
 	}
@@ -36,7 +29,7 @@ public class KaboomMic : MonoBehaviour {
 	public void Explode() {
  		if(detected && Vector3.Distance(player.position, transform.position) <= explodeRange && explode == true) {
 			Destroy(player.gameObject);
-			Debug.Log("Destroy");
+			Destroy(this.gameObject);
 		}
 	}
 
