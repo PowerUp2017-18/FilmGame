@@ -6,7 +6,7 @@ public class Countdown : MonoBehaviour {
 	
 	public TextMesh countdownText;
 
-	public float countdownInt = 5;
+	public float countdownInt = 5f;
 	public string countdownStr;
 
 	public GameObject boom;
@@ -23,8 +23,7 @@ public class Countdown : MonoBehaviour {
     	countdownStr = countdownInt.ToString("f1");
 
     	if(boom.GetComponent<KaboomMic>().detected == true) {
-    		countdownInt -= 1 * Time.deltaTime;
-    		Debug.Log("fsfs");
+    		countdownInt -= Time.deltaTime;
     	}
     	countdownText.text = countdownStr;
     }
