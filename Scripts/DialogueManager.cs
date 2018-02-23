@@ -8,6 +8,8 @@ public class DialogueManager : MonoBehaviour {
 	public Text nameText;
 	public Text dialogueText;
 
+	public GameObject dBox;
+
 	public Animator animator;
 
 	private Queue<string> sentences;
@@ -38,6 +40,7 @@ public class DialogueManager : MonoBehaviour {
 		if (sentences.Count == 0)
 		{
 			EndDialogue();
+			dBox.SetActive(false);
 			return;
 		}
 
