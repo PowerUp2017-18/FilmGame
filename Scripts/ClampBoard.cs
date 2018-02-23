@@ -17,8 +17,6 @@ public class ClampBoard: MonoBehaviour {
     private bool jumping;
     private bool onGround;
 
-    private Vector3 moveDirection = Vector3.zero;
-
     void Start () {
         rigid = this.GetComponent<Rigidbody2D>();
         StartCoroutine (JumpTimer());
@@ -30,26 +28,27 @@ public class ClampBoard: MonoBehaviour {
     }
 
     public void Move() {
-        rigid.velocity = new Vector2(-moveSpeed, this.rigid.velocity.y);
+        rigid.velocity = new Vector2(-moveSpeed, 0);
     }
 
     IEnumerator JumpTimer() {
         while (true) {
             yield return new WaitForSeconds (Random.Range (5, 10));
             Jump();
+            Debug.Log ("Jump");
         }
     }
 
     public void Jump() {
-        rigid.velocity = new Vector2(this.rigid.velocity.x,jumpForce);
+        rigid.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
     }
 
     void OnCollisionEnter2D(Collision2D col) {
         if (col.gameObject.tag == "Wall") {
             moveSpeed *= -1;
         }
-        if(col.gameObject.tag == "Enemy") {
-            moveSpeed *= -1;
+        if(col.gameObject.tag == "Player") {
+            Destroy(col.gameObject);
         }
     }
 }
