@@ -3,13 +3,12 @@ using System.Collections;
 
 [RequireComponent (typeof (Controller2D))]
 public class Player : MonoBehaviour {
-	
-	public float moveSpeed = 0;
-	public float jumpHeight = 0;
+
+	public float jumpHeight = 4;
 	public float timeToJumpApex = .4f;
 	float accelerationTimeAirborne = .2f;
 	float accelerationTimeGrounded = .1f;
-	
+	float moveSpeed = 6;
 
 	float gravity;
 	float jumpVelocity;
