@@ -12,6 +12,7 @@ public class KaboomMic : MonoBehaviour {
 	public bool detected = false;
 	private bool inRange = false;
 	private bool explode = false;
+	private bool coroutineRun = false;
 
 	public Transform player;
 	
@@ -20,7 +21,13 @@ public class KaboomMic : MonoBehaviour {
 	}
 
 	public void Detection() {
-		if(Vector3.Distance(player.position, transform.position) <= detectionRange) {
+		if(Vector3.Distance(player.position, transform.position) >= detectionRange) {
+			detected = false;
+			if(coroutineRun = true) {
+				coroutineRun = false;
+				StopCoroutine(Countdown());
+			}
+		} else if(Vector3.Distance(player.position, transform.position) <= detectionRange) {
 			detected = true;
 			StartCoroutine(Countdown());
 		}
@@ -34,6 +41,7 @@ public class KaboomMic : MonoBehaviour {
 	}
 
 	IEnumerator Countdown() {
+		coroutineRun = true;
         while (true) {
             yield return new WaitForSeconds (explodeTime);
             explode = true;
