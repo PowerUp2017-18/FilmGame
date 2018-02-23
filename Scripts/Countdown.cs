@@ -25,6 +25,9 @@ public class Countdown : MonoBehaviour {
     	if(boom.GetComponent<KaboomMic>().detected == true) {
     		countdownInt -= Time.deltaTime;
     	}
+    	if(countdownInt == 0 && boom.GetComponent<KaboomMic>().detected == false) {
+    		countdownInt = 5f;
+    	}
     	countdownText.text = countdownStr;
     }
 }
