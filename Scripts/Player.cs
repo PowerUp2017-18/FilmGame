@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [RequireComponent (typeof (Controller2D))]
@@ -6,6 +7,8 @@ public class Player : MonoBehaviour {
 
 	public float jumpHeight = 4;
 	public float timeToJumpApex = .4f;
+	public Text countText;
+	private int count;
 	float accelerationTimeAirborne = .2f;
 	float accelerationTimeGrounded = .1f;
 	float moveSpeed = 6;
@@ -23,7 +26,10 @@ public class Player : MonoBehaviour {
 		gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		print ("Gravity: " + gravity + "  Jump Velocity: " + jumpVelocity);
-	}
+	
+		count = 0;
+        SetCountText ();
+		}
 
 	void Update() {
 
@@ -42,4 +48,22 @@ public class Player : MonoBehaviour {
 		velocity.y += gravity * Time.deltaTime;
 		controller.Move (velocity * Time.deltaTime);
 	}
+
+	void OnTriggerEnter(Collider other) {
+        
+        if (other.gameObject.CompareTag ("Prop")) {
+            other.gameObject.SetActive (false);
+            count = count + 1;
+            SetCountText ();
+        }
+    }
+
+    void SetCountText () {
+        
+        GameObject[] Prop = GameObject.FindGameObjectsWithTag("Prop");
+        int total = Prop.Length;
+        countText.text = count.ToString () + "/" + total ;
+    }
+
+
 }
